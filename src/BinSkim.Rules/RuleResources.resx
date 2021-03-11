@@ -481,6 +481,15 @@ Modules triggering this check were:
     <value>'{0}' is a native binary that directly compiles and links one or more object files which were hashed using an insecure checksum algorithm (MD5). MD5 is subject to collision attacks and its use can compromise supply chain integrity. Pass '/ZH:SHA_256' on the cl.exe command-line to enable secure source code hashing. The following modules are out of policy:
 {1}</value>
   </data>
+  <data name="BA2025_RequireSignatureCheck_Description" xml:space="preserve">
+    <value>Forced Integrity checking is a policy that ensures a binary that is being loaded is signed prior to loading. The IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY flag is set in the PE header at link time by using the /INTEGRITYCHECK linker flag to indicate that the binary being loaded must be signed. This flag causes the Windows memory manager to enforce a signature check at load time on the binary file. Applications check for presence of the flag when the binary is loaded in order to ensure that the identity of publisher is known. The Forced Integrity policy is enforced on Windows Vista, Windows Server 2008 and later releases when the IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY flag is set. The Forced Integrity policy is enforced on both 32 bit and 64 bit systems and in both user and kernel mode. However, Force Integrity is not enforced for boot start drivers. The following Windows features enforce integrity checking on third-party binaries: Windows Security Center, Appinit.dll extensions, Object Manager filter registration, extended process filter registration APIs, and for Windows 7, Windows Biometric Framework, LSA extensions, and NTOS kernel extensions. There is a development cost associated with signing binaries with the IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY flag set, so do not set the IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY flag unless your component requires it. See https://social.technet.microsoft.com/wiki/contents/articles/255.forced-integrity-signing-of-portable-executable-pe-files.aspx for more information.</value>
+  </data>
+  <data name="BA2025_Warning" xml:space="preserve">
+    <value>'{0}' is a kernel mode binary that was not compiled with /INTEGRITYCHECK, requiring the Windows memory manager to check for a digital signature when loading the image.</value>
+  </data>
+  <data name="BA2025_Pass" xml:space="preserve">
+    <value>'{0}' is a kernel mode binary that was compiled with /INTEGRITYCHECK, requiring the Windows memory manager to check for a digital signature when loading the image.</value>
+  </data>
   <data name="BA2006_Error_OutdatedCsc" xml:space="preserve">
     <value>'{0}' is a managed assembly that was compiled with an outdated toolchain ({1}) that does not support security features (such as SHA256 PDB checksums and reproducible builds) that must be enabled by policy. To resolve this issue, compile with more recent tools ({2} or later).</value>
   </data>

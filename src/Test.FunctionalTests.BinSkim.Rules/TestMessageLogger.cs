@@ -80,20 +80,11 @@ namespace Microsoft.CodeAnalysis.IL.Rules
             switch (messageKind)
             {
                 case FailureLevel.Error:
-                {
-                    this.FailTargets.Add(targetPath);
-                    break;
-                }
-
                 case FailureLevel.Warning:
-                {
-                    this.FailTargets.Add(targetPath);
-                    break;
-                }
-
                 case FailureLevel.Note:
                 {
-                    throw new NotImplementedException();
+                    this.FailTargets.Add(targetPath);
+                    break;
                 }
 
                 default:

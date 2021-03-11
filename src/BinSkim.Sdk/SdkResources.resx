@@ -219,6 +219,9 @@
   <data name="MetadataCondition_ImageIsDotNetNativeBootstrapExe" xml:space="preserve">
     <value>image is a .NET native bootstrap exe</value>
   </data>
+  <data name="MetadataCondition_ImageIsNotKernelModeBinary" xml:space="preserve">
+    <value>image is not a kernel mode binary</value>
+  </data>
   <data name="Verbose_ReplaceWithLevelAndKind" xml:space="preserve">
     <value>use --level and --kind</value>
   </data>

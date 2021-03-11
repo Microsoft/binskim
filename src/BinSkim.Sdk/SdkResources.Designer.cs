@@ -268,6 +268,15 @@ namespace Microsoft.CodeAnalysis.IL.Sdk {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to image is not a kernel mode binary.
+        /// </summary>
+        internal static string MetadataCondition_ImageIsNotKernelModeBinary {
+            get {
+                return ResourceManager.GetString("MetadataCondition_ImageIsNotKernelModeBinary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to image is not a PE binary.
         /// </summary>
         internal static string MetadataCondition_ImageIsNotPE {

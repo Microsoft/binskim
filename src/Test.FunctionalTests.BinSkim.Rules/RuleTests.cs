@@ -1092,6 +1092,24 @@ namespace Microsoft.CodeAnalysis.IL.Rules
         }
 
         [Fact]
+        public void BA2025_RequireSignatureCheck()
+        {
+            if (BinaryParsers.PlatformSpecificHelpers.RunningOnWindows())
+            {
+                this.VerifyPass(new RequireSignatureCheck(), useDefaultPolicy: true);
+            }
+        }
+
+        [Fact]
+        public void BA2025_RequireSignatureCheck_Fail()
+        {
+            if (BinaryParsers.PlatformSpecificHelpers.RunningOnWindows())
+            {
+                this.VerifyFail(new RequireSignatureCheck(), useDefaultPolicy: true);
+            }
+        }
+
+        [Fact]
         public void BA3001_EnablePositionIndependentExecutable_Pass()
         {
             this.VerifyPass(new EnablePositionIndependentExecutable());

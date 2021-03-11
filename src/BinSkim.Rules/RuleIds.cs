@@ -39,6 +39,7 @@ namespace Microsoft.CodeAnalysis.IL.Rules
         public const string SignSecurely = "BA2022";
 
         public const string EnableSpectreMitigations = "BA2024";
+        public const string RequireSignatureCheck = "BA2025";
 
         // ELF Checks
         public const string EnablePositionIndependentExecutable = "BA3001";
