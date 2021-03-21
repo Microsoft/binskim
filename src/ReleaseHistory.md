@@ -7,7 +7,8 @@
 * FEATURE: Add support to specific rule documentation in `HelpUri`. [#348](https://github.com/microsoft/binskim/pull/348)
 
 ## **v2.0.0** In progress (probably May/June 2021)
-* BREAKING: Change from self-contained to dotnettool.
+* BREAKING: Change from self-contained to dotnet-tool.
+* FEATURE: Enable .NET 5 support.
 
 ## **v1.7.4** [NuGet Package](https://www.nuget.org/packages/Microsoft.CodeAnalysis.BinSkim/1.7.4)
 * BREAKING: Adding `--verbose` as obsolete which translate to `--level` and `--kind`. [#347](https://github.com/microsoft/binskim/pull/347)

@@ -15,9 +15,13 @@
     <projectUrl>https://github.com/microsoft/binskim</projectUrl>
     <tags>binary analysis binskim binscope security portable executable linkable format sdl devops devsecops</tags>
     <iconUrl>https://go.microsoft.com/fwlink/?linkid=2008940</iconUrl>
+    <packageTypes>
+      <packageType name="DotnetTool" />
+    </packageTypes>
   </metadata>
   <files>
-    <file src="bld\bin\AnyCPU_$configuration$\Publish\**\*" target="tools"/>   
+    <file src="bld\bin\AnyCPU_$configuration$\Publish\netcoreapp3.1\**\*" target="tools\netcoreapp3.1\any"/>   
+    <file src="bld\bin\AnyCPU_$configuration$\Publish\net5.0\**\*" target="tools\net5.0\any"/>
     <file src="src\ReleaseHistory.md" target="tools\ReleaseHistory.md" />
     <file src="src\BinaryParsers\**\*.cs" target="src\BinaryParsers" />
     <file src="src\BinSkim.Driver\**\*.cs" target="src\BinSkim.Driver" />

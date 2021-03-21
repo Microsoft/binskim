@@ -481,21 +481,29 @@ namespace Microsoft.CodeAnalysis.IL.Rules
             public _FILETIME sftVerifyAsOf;
             public uint csCertChain;
 
+            /// <summary>
             /// _CRYPT_PROVIDER_CERT*
+            /// </summary>
             public IntPtr pasCertChain;
 
             public uint dwSignerType;
 
+            /// <summary>
             /// CMSG_SIGNER_INFO*
+            /// </summary>
             public IntPtr psSigner;
 
             public uint dwError;
             public uint csCounterSigners;
 
+            /// <summary>
             /// _CRYPT_PROVIDER_SGNR*
+            /// </summary>
             public IntPtr pasCounterSigners;
 
+            /// <summary>
             /// PCCERT_CHAIN_CONTEXT->CERT_CHAIN_CONTEXT*
+            /// </summary>
             public IntPtr pChainContext;
         }
 

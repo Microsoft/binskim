@@ -54,8 +54,8 @@ namespace Microsoft.CodeAnalysis.BinaryParsers.PortableExecutable
             {
                 o = sp.SafePointerToType(fi);
                 ((object[])res)[i] = o;
-                len = (o is ImageHeader)
-                    ? ((ImageHeader)o).Size
+                len = (o is ImageHeader header)
+                    ? header.Size
                     : fi.GetTypeLen();
                 sp = sp + len;
             }

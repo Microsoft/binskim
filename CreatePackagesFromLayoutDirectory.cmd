@@ -36,19 +36,15 @@ call BuildPackages.cmd %Configuration% %Platform% %NuGetOutputDirectory% %Versio
 goto :Exit
 
 :CopyExeForSigning
-xcopy /Y %LayoutForSigningDirectory%\netcoreapp3.1\win-x86\%~n1.exe %BinaryOutputDirectory%\netcoreapp3.1\win-x86\ 
-if "%ERRORLEVEL%" NEQ "0" (echo %1 assembly copy failed. && goto :ExeFilesExit)
-xcopy /Y %LayoutForSigningDirectory%\netcoreapp3.1\win-x64\%~n1.exe %BinaryOutputDirectory%\netcoreapp3.1\win-x64\ 
+xcopy /Y %LayoutForSigningDirectory%\netcoreapp3.1\%~n1.exe %BinaryOutputDirectory%\netcoreapp3.1\ 
+xcopy /Y %LayoutForSigningDirectory%\net5.0\%~n1.exe %BinaryOutputDirectory%\net5.0\ 
 if "%ERRORLEVEL%" NEQ "0" (echo %1 assembly copy failed. && goto :ExeFilesExit)
 :ExeFilesExit
 Exit /B %ERRORLEVEL%
 
 :CopyFilesForMultitargeting
-xcopy /Y %BinaryOutputDirectory%\netcoreapp3.1\win-x86\%~n1.dll %LayoutForSigningDirectory%\netcoreapp3.1\win-x86\ 
-if "%ERRORLEVEL%" NEQ "0" (echo %1 assembly copy failed. && goto :CopyFilesExit)
-xcopy /Y %BinaryOutputDirectory%\netcoreapp3.1\win-x64\%~n1.dll %LayoutForSigningDirectory%\netcoreapp3.1\win-x64\ 
-if "%ERRORLEVEL%" NEQ "0" (echo %1 assembly copy failed. && goto :CopyFilesExit)
-xcopy /Y %BinaryOutputDirectory%\netcoreapp3.1\linux-x64\%~n1.dll  %LayoutForSigningDirectory%\netcoreapp3.1\linux-x64\
+xcopy /Y %LayoutForSigningDirectory%\netcoreapp3.1\%~n1.dll %BinaryOutputDirectory%\netcoreapp3.1\ 
+xcopy /Y %LayoutForSigningDirectory%\net5.0\%~n1.dll %BinaryOutputDirectory%\net5.0\ 
 if "%ERRORLEVEL%" NEQ "0" (echo %1 assembly copy failed. && goto :CopyFilesExit)
 :CopyFilesExit
 Exit /B %ERRORLEVEL%

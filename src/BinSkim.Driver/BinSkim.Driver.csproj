@@ -5,7 +5,7 @@
   <PropertyGroup>
     <AssemblyName>BinSkim</AssemblyName>
     <!--  Condition="'$(OS)'=='Windows_NT'" -->
-    <TargetFramework>$(NetCoreVersion)</TargetFramework>
+    <TargetFrameworks>$(NetCoreVersion)</TargetFrameworks>
     <TargetLatestRuntimePatch>True</TargetLatestRuntimePatch>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
@@ -23,6 +23,7 @@
     <Content Include="README.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include=".\DotnetToolSettings.xml" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
@@ -66,7 +67,7 @@
 
   <ItemGroup>
     <!-- May need to be changed to x86 on a 32 bit machine. -->
-    <MsDiaLibs Include="..\..\refs\x64\*" Condition="'$(TargetFramework)'=='$(NetCoreVersion)' And '$(RuntimeIdentifier)'==''" />
+    <MsDiaLibs Include="..\..\refs\x64\*" Condition="'$(RuntimeIdentifier)'==''" />
     <!-- Note: Official Release builds on Windows should specify a RID. Build using the BuildAndTest.cmd script. -->
     <MsDiaLibs Include="..\..\refs\x86\*" Condition="'$(RuntimeIdentifier)'=='win-x86'" />
     <MsDiaLibs Include="..\..\refs\x64\*" Condition="'$(RuntimeIdentifier)'=='win-x64'" />

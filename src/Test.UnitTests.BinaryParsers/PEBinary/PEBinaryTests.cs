@@ -19,7 +19,11 @@ namespace Microsoft.CodeAnalysis.BinaryParsers
 
         internal static string GetTestDirectory(string relativeDirectory)
         {
+#if NETCOREAPP3_1
             var codeBaseUrl = new Uri(Assembly.GetExecutingAssembly().CodeBase);
+#else
+            var codeBaseUrl = new Uri(Assembly.GetExecutingAssembly().Location);
+#endif
             string codeBasePath = Uri.UnescapeDataString(codeBaseUrl.AbsolutePath);
             string dirPath = Path.GetDirectoryName(codeBasePath);
             dirPath = Path.Combine(dirPath, string.Format(@"..{0}..{0}..{0}..{0}src{0}", Path.DirectorySeparatorChar));

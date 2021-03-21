@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis.BinaryParsers;
 
 namespace Microsoft.CodeAnalysis.IL.Sdk
 {
-    internal class BinaryTargetManager
+    internal static class BinaryTargetManager
     {
         // We may want to consider changing this to an extension/plugin model rather than a hardcoded list of supported binary parsers.
         // However, for now this will do.

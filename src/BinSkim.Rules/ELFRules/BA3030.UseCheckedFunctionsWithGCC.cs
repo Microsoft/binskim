@@ -106,9 +106,9 @@ namespace Microsoft.CodeAnalysis.IL.Rules
 
         /// <summary>
         /// The stack protector ensures that all functions that use buffers over a certain size will
-        //  use a stack cookie(and check it) to prevent stack based buffer overflows, exiting if stack
-        // smashing is detected.Use '--fstack-protector-strong' (all buffers of 4 bytes or more) or 
-        // '--fstack-protector-all' (all functions) to enable this.
+        /// use a stack cookie(and check it) to prevent stack based buffer overflows, exiting if stack
+        /// smashing is detected.Use '--fstack-protector-strong' (all buffers of 4 bytes or more) or
+        /// '--fstack-protector-all' (all functions) to enable this.
         /// </summary>
         public override MultiformatMessageString FullDescription => new MultiformatMessageString { Text = RuleResources.BA3030_UseCheckedFunctionsWithGcc_Description };
 
