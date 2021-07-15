@@ -43,6 +43,8 @@ namespace Microsoft.CodeAnalysis.IL
                 ShouldWarnVerbose = false;
             }
 
+            binaryAnalyzerContext.CompilerDataLogger = new CompilerDataLogger(binaryAnalyzerContext, options.RepositoryUri, options.PipelineName);
+
             return binaryAnalyzerContext;
         }
 
@@ -67,6 +69,8 @@ namespace Microsoft.CodeAnalysis.IL
             }
 
             int result = base.Run(analyzeOptions);
+
+            CompilerDataLogger.Flush();
 
             // In BinSkim, no rule is ever applicable to every target type. For example,
             // we have checks that are only relevant to either 32-bit or 64-bit binaries.

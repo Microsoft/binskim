@@ -48,14 +48,14 @@ namespace Microsoft.CodeAnalysis.IL.Rules
 
             if (PrintHeader)
             {
-                Console.WriteLine("Target,Compiler Name,Compiler BackEnd Version,Compiler FrontEnd Version,Language,Module Name,Module Library,Hash,Error");
+                context.CompilerDataLogger.PrintHeader();
                 PrintHeader = false;
             }
 
             if (pdb == null)
             {
-                Console.Write(context.TargetUri.LocalPath + ",");
-                Console.WriteLine($",,,,,,{context?.Hashes?.Sha256},{target.PdbParseException.Message}");
+                string errorMessage = target.PdbParseException.Message;
+                context.CompilerDataLogger.WriteException(errorMessage);
                 return;
             }
 
@@ -83,7 +83,7 @@ namespace Microsoft.CodeAnalysis.IL.Rules
                         omDetails.CompilerFrontEndVersion + "," +
                         omDetails.Language;
 
-                    if (!records.TryGetValue(record, out ObjectModuleDetails value))
+                    if (!records.ContainsKey(record))
                     {
                         records[record] = omDetails;
                     }
@@ -92,18 +92,7 @@ namespace Microsoft.CodeAnalysis.IL.Rules
 
             foreach (KeyValuePair<string, ObjectModuleDetails> kv in records)
             {
-                string compilerData = kv.Key;
-                ObjectModuleDetails omDetails = kv.Value;
-
-                string name = omDetails.Name?.Replace(",", "_");
-                string library = omDetails.Library?.Replace(",", ";");
-
-                Console.Write($"{context.TargetUri.LocalPath},");
-                Console.Write($"{compilerData},");
-                Console.Write($"{name},");
-                Console.Write($"{(name == library ? string.Empty : library)},");
-                Console.Write($"{context?.Hashes?.Sha256},");
-                Console.WriteLine();
+                context.CompilerDataLogger.Write(kv.Key, kv.Value);
             }
         }
     }

@@ -55,6 +55,7 @@ namespace Microsoft.CodeAnalysis.IL.Sdk
                 this.uri = value;
             }
         }
+
         public bool TracePdbLoads { get; set; }
 
         public string SymbolPath { get; set; }
@@ -76,6 +77,8 @@ namespace Microsoft.CodeAnalysis.IL.Sdk
         public RuntimeConditions RuntimeErrors { get; set; }
         public bool AnalysisComplete { get; set; }
         public DefaultTraces Traces { get; set; }
+
+        public ICompilerDataLogger CompilerDataLogger { get; set; }
 
         private bool disposed = false;
 

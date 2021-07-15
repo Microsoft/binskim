@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.BinaryParsers
         public SingleMachOBinary(MachO singleMachO, Uri uri) : base(uri)
         {
             this.MachO = singleMachO;
-            LoadCompilationUnits();
+            CompilationUnits = LoadCompilationUnits();
         }
 
         public MachO MachO { get; }
@@ -44,20 +44,7 @@ namespace Microsoft.CodeAnalysis.BinaryParsers
 
         public IEnumerable<EntryPoint> EntryPoint => this.MachO.GetCommandsOfType<EntryPoint>();
 
-        private List<DwarfCompilationUnit> compilationUnits;
-
-        public List<DwarfCompilationUnit> CompilationUnits
-        {
-            get
-            {
-                if (compilationUnits == null)
-                {
-                    compilationUnits = LoadCompilationUnits();
-                }
-
-                return compilationUnits;
-            }
-        }
+        public List<DwarfCompilationUnit> CompilationUnits { get; }
 
         private List<DwarfLineNumberProgram> lineNumberPrograms;
 

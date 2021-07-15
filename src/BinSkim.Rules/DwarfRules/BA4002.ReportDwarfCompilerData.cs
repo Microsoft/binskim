@@ -91,15 +91,7 @@ namespace Microsoft.CodeAnalysis.IL.Rules
 
                     processedRecords.Add(currentRecord);
 
-                    Console.Write($"{context.TargetUri.LocalPath},");
-                    Console.Write($"{compiler.Compiler},");
-                    Console.Write($"{compiler.Version},");
-                    Console.Write($"{compiler.Version},");
-                    Console.Write($"{language},");
-                    Console.Write($"{file},");
-                    Console.Write($"{file},");
-                    Console.Write($"{context?.Hashes?.Sha256},");
-                    Console.WriteLine();
+                    context.CompilerDataLogger.Write(compiler.Compiler.ToString(), compiler.Version.ToString(), language, file);
                 }
             }
         }
