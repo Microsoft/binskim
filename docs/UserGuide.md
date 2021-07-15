@@ -33,7 +33,7 @@ binskim analyze *.dll --output MyLog.sarif
 
 | Command Type | Description |
 | ------------ | ----------- |
-| **General** | <p>General BinSkim help message. Displays all built-in commands (e.g. help, analyze and capture) for which more detailed help can be requested</p><p>`binskim.exe --help`</p> |
+| **General** | General BinSkim help message. Displays all built-in commands (e.g. help, analyze and capture) for which more detailed help can be requested  `binskim.exe --help` |
 | **Detailed** | <p>Specific commands. Structure looks like this: `binskim.exe help [command]`</p><ul><li>`binskim.exe help analyze`</li><li>`binskim.exe help exportRules`</li><li>`binskim.exe help exportConfig`</li><li>`binskim.exe help dump`</li><li>`binskim.exe help version`</li></ul> |
 
 ### Analyze Command
@@ -55,6 +55,7 @@ The **`analyze`** command supports the following additional arguments:
 | **`--rich-return-code`** | Output a more detailed exit code consisting of a series of flags about execution, rather than outputting '0' for success/'1' for failure (see codes below) |
 | **`--level`** | Filter output of scan results to one or more failure levels. Valid values: Error, Warning and Note. |
 | **`--kind`** | Filter output one or more result kinds. Valid values: Fail (for literal scan results), Pass, Review, Open, NotApplicable and Informational. |
+| **`--baseline`** | A Sarif file to be used as baseline. |
 | **`-v, --sarif-output-version`** | (Default: Current) The SARIF version of the output log file. Valid values are OneZeroZero and Current |
 
 In addition to the named arguments above, BinSkim accepts one or more specifiers to a file, directory, or filter pattern that resolves to one or more binaries to analyze. Arguments can include wild cards, relative paths (in which case the file or directory path is resolved relative to the current working directory), and environment variables.
@@ -71,7 +72,7 @@ When BinSkim cannot properly load a PDB, because it is missing, corrupted, etc.,
 
 The following table lists all BinSkim rules by ID and Name, detailing specific PDB information examined during analysis. Generally, each of these checks also inspects each object module language in order to restrict analysis to Microsoft C/C++ compilers.
 
-| ID | Name	| Data Examined |
+| ID | Name | Data Examined |
 | -- | ---- | ------------- |
 | **BA2002** | `DoNotIncorporateVulnerableDependencies` | Source files for all linked object modules |
 | **BA2006** | `BuildWithSecureTools` | Compiler version of all linked object modules |
@@ -80,8 +81,7 @@ The following table lists all BinSkim rules by ID and Name, detailing specific P
 | **BA2013** | `InitializeStackProtection` | Scans PDB for /GS feature function name |
 | **BA2014** | `DoNotDisableStackProtectionForFunctions` | `IDiaSymbol::get_isSafeBuffers` value for all binary functions |
 | **BA2024** | `EnableSpectreMitigations` | Compiler version of all linked object modules |
-
-       
+  
 #### --local-symbol-directories
 
 The `--local-symbol-directories` argument configures a set of semicolon-delimited local directory paths that will be examined when attempting to locate PDBs. Provide this argument when your build system redirects PDB production to an alternate location (rather than emitting them alongside their matching binary).
@@ -120,13 +120,13 @@ The `--rich-return-code` argument configures BinSkim to exit with a detailed exi
 
 Non-fatal warnings correspond to behaviors that should be expected during normal successful operation of the tool--for instance, the tool can execute successfully and still find errors.
 
-| Name | Value	| Explanation/Guidance |
+| Name | Value | Explanation/Guidance |
 | -- | ---- | ------------- |
 | **InvalidCommandLineOption** | `0x1` | Invalid command line options were passed to BinSkim. Please check your command line options.  |
 | **ExceptionInSkimmerInitialize** | `0x2` | A Skimmer/Rule was unable to initialize. That rule will be disabled during this run. Please report this to the BinSkim team. |
 | **ExceptionRaisedInSkimmerCanAnalyze** | `0x4` | A Skimmer/Rule encountered an exception when attempting to determine if it applied to a target file. That rule will be disabled for the remainder of the run. Please report this to the BinSkim team. |
 | **ExceptionInSkimmerAnalyze** | `0x8` | An exception was raised when a skimmer attempted to analyze a file. That rule will be disabled for the remainder of the run. Please report this to the BinSkim team. |
-| **ExceptionCreatingLogFile** | ` 0x10` | BinSkim was unable to write to the log file you specified on the command line. The file may already exist, or you may not have permission to write to the folder you specified. |
+| **ExceptionCreatingLogFile** | `0x10` | BinSkim was unable to write to the log file you specified on the command line. The file may already exist, or you may not have permission to write to the folder you specified. |
 | **ExceptionLoadingPdb** | `0x20` | BinSkim encountered an exception loading a Pdb. This can occur if a PDB is missing, or if it's malformed. Ensure that valid .PDB files are present for each PE binary you wish to scan--BinSkim cannot evaluate some of its rules if they are missing. |
 | **ExceptionInEngine** | `0x40` | The BinSkim engine encountered an unexpected exception and execution could not continue. Please report this to the BinSkim team. |
 | **ExceptionLoadingTargetFile** | `0x80` | BinSkim failed to load/parse one of the input files. Ensure your input files are valid binaries that BinSkim can parse, and reach out to the BinSkim team if they are.  |
@@ -146,7 +146,7 @@ Non-fatal warnings correspond to behaviors that should be expected during normal
 
 This leads to these masks being helpful when determining what to do with a rich exit code:
 
-| Name | Value	| Explanation/Guidance |
+| Name | Value | Explanation/Guidance |
 | -- | ---- | ------------- |
 | **NonFatalExitCode** | 0xF8000000 | These are the currently explicitly reserved non-fatal exit codes--they will occur during normal execution of the tool.  They may be helpful for checking if the tool found any issues or similar during its execution. |
 | **FatalExitCode** | 0x0000FFFF | These are all the explicitly reserved fatal exit codes--they indicate something unexpected went wrong during execution, or that a target that we expected to be able to analyze could not be fully analyzed (for example, the .PDB file was missing, or the file was incorrectly formatted).  This may be helpful for checking during any tool run. |
